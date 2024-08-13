@@ -1,0 +1,19 @@
+.btn {
+    background-color: darkseagreen;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.red {
+    background-color: #ac5353;
+}
+
+.blue {
+    background-color: blue;
+    color: white;
+}
+
+.yellow{
+    background-color: yellow;
+}
