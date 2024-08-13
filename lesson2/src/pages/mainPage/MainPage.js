@@ -10,8 +10,27 @@ import Example from "../../components/example/Example";
 import Modal from "../../components/modal/Modal";
 import Count from "../../components/count/Count";
 import {logDOM} from "@testing-library/react";
+import List from "../../components/list/List";
 
 const MainPage = () => {
+    const list = [
+        {
+            id: 1,
+            title: 'coding',
+            completed: false
+        },
+        {
+            id: 2,
+            title: 'eat',
+            completed: false
+        },
+        {
+            id: 3,
+            title: 'sleep',
+            completed: false
+        }
+    ];
+
     const [show, setShow] = useState(false)
     // let show = false
     const handleShow = () => {
@@ -29,6 +48,7 @@ const MainPage = () => {
 
     return (
         <div>
+            <List list={list}/>
             <Input type="text" placeholder={'Введите текст'} handleChange={handleChange}/>
             {/*<Header/>*/}
             {/*<h1>Hello</h1>*/}
