@@ -10,41 +10,9 @@ const TodoPage = () => {
     const [inputValue, setInputValue] = useState('')
     const [todoList, setTodoList] = useState([]);
 
-    // [
-    //     {
-    //         id: 1,
-    //         title: 'coding',
-    //         completed: false
-    //     },
-    //     {
-    //         id: 2,
-    //         title: 'eat',
-    //         completed: false
-    //     },
-    //     {
-    //         id: 3005,
-    //         title: 'sleep',
-    //         completed: false
-    //     }
-    // ]
-
-    useEffect(() => {
-        const myLocalStorage = JSON.parse(localStorage.getItem('tasks'))
-        if (myLocalStorage ===null ) {
-            return localStorage.setItem('tasks', JSON.stringify(todoList))
-        }
-        if (myLocalStorage !== 0){
-            setTodoList(myLocalStorage)
-        }
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem('tasks', JSON.stringify(todoList))
-    }, [todoList]);
-
     useEffect(() => {
         console.log('useEffect')
-    },[show])
+    },[show, todoList])
 
     const handleShow = () => {
         setShow(!show)
@@ -60,11 +28,20 @@ const TodoPage = () => {
             title: inputValue,
             completed:false
         }])
+        setInputValue('');
+    }
+
+    const handleEdit = (todoEdit) => {
+        todoList.map(todo => {
+            if(todoEdit.id === todo.id)
+                return todo.title = todoEdit.title
+        })
+        setTodoList(([...todoList]))
     }
 
     const handleDone = (id) => {
-        todoList.map(todo=> {
-            if(id===todo.id) {
+        todoList.map(todo => {
+            if(id === todo.id) {
                 return todo.completed = !todo.completed
             }
         })
@@ -72,8 +49,22 @@ const TodoPage = () => {
     }
 
     const handleDelete = (id) => {
-        setTodoList(todoList.filter(todo=> todo.id !== id))
+        setTodoList(todoList.filter(todo => todo.id !== id))
     }
+
+    useEffect(() => {
+        const myLocalStorage = JSON.parse(localStorage.getItem('tasks'))
+        if (myLocalStorage ===null ) {
+            return localStorage.setItem('tasks', JSON.stringify(todoList))
+        }
+        if (myLocalStorage !== 0){
+            setTodoList(myLocalStorage)
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('tasks', JSON.stringify(todoList))
+    }, [todoList]);
 
     // const task = () =>  localStorage.setItem('todoList', JSON.stringify({
     //     id: 1,
@@ -85,6 +76,10 @@ const TodoPage = () => {
     //     task()
     // }, [])
 
+    const handleClear = () => {
+        setTodoList([])
+        localStorage.removeItem('tasks')
+    }
 
     return (
         <div className={classes.wrapper}>
@@ -95,7 +90,13 @@ const TodoPage = () => {
                 </Modal>
             }
             {/*<List list={list}/>*/}
-            <TodoList lists={todoList} handleDone={handleDone} handleDelete={handleDelete}/>
+            <TodoList
+                lists={todoList}
+                handleDone={handleDone}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+            />
+            <Button title={'Очистить все'} handleShow={handleClear}/>
         </div>
     );
 };
