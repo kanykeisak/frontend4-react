@@ -1,8 +1,13 @@
 .btn {
-    background-color: darkseagreen;
+    /*background-color: darkseagreen;*/
+    /*padding: 10px;*/
+    /*border-radius: 5px;*/
+    background: rgba(219, 0, 255, 0.85);
+    border-radius: 8px;
     padding: 10px;
-    border-radius: 5px;
-
+    width: 316px;
+    height: 42px;
+    margin-top: 32px;
 }
 
 .red {
@@ -17,3 +22,4 @@
 .yellow{
     background-color: yellow;
 }
+

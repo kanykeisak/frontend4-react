@@ -1,0 +1,36 @@
+*{
+    background-color: black;
+}
+.container{
+    width: 1060px;
+    margin: 0 auto;
+}
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-bottom: 1px solid #fff;
+    height: 120px;
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 40px;
+}
+.card{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+}
+
+.cards{
+    text-align: center;
+    font-size: 24px;
+    color: white;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    padding: 15px 12px;
+    width: 340px;
+    height: 274px;
+}

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {getData} from "../todoPage/TodoPage";
+import classes from "./PokemonPage.module.scss";
+import PokemonList from "../../components/pokemonList/PokemonList";
 
 const PokemonPage = () => {
     const [pokemons, setPokemons] = useState([]);
@@ -28,16 +29,11 @@ const PokemonPage = () => {
         }
     }
     return (
-        <div>
-            {
-                pokemons.map(pokemon =>
-                <div>
-                    <p>
-                        name: {pokemon.name}
-                    </p>
-                </div>)
-            }
-
+        <div className={classes.container}>
+            <div className={classes.title}>
+                <p>Pokemon</p>
+            </div>
+            <PokemonList/>
         </div>
     );
 };
