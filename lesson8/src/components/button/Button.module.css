@@ -1,0 +1,25 @@
+.btn {
+    /*background-color: darkseagreen;*/
+    /*padding: 10px;*/
+    /*border-radius: 5px;*/
+    background: rgba(219, 0, 255, 0.85);
+    border-radius: 8px;
+    padding: 10px;
+    width: 100px;
+    height: 42px;
+    margin-top: 32px;
+}
+
+.red {
+    background-color: #ac5353;
+}
+
+.blue {
+    background-color: blue;
+    color: white;
+}
+
+.yellow{
+    background-color: yellow;
+}
+

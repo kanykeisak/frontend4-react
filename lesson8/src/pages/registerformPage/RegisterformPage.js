@@ -1,23 +1,23 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import * as Yup from 'yup';
 import classes from "./RegisterformPage.module.scss";
 
 const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
-const schema = yup.object().shape({
-    name: yup.string().required('Обязательное поле').min(3, 'Необходимо 3'),
-    email: yup.string().required('Обязательное поле').email('').matches(gmailRegex,'@gmail.com'),
-    password: yup.string().required('Обязательное поле').min(6, 'Необходимо 8'),
-    confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Повторите пароль'),
+const schema = Yup.object().shape({
+    name: Yup.string().required('Обязательное поле').min(3, 'Необходимо 3'),
+    email: Yup.string().required('Обязательное поле').email('Неверный формат email').matches(gmailRegex,'Email должен быть @gmail.com'),
+    password: Yup.string().required('Обязательное поле').min(6, 'Необходимо 8'),
+    confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Повторите пароль'),
 });
 
 const RegisterformPage = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors, isValid }
     } = useForm({
         resolver: yupResolver(schema)
     });
@@ -41,8 +41,9 @@ const RegisterformPage = () => {
                             {
                                 ...register('name')
                             }
+                            aria-invalid={errors.name ? true : false}
                         />
-                        {errors.name && <p>{errors.name.message}</p>}
+                        {errors?.name?.message && <p>{errors?.name?.message}</p>}
                     </div>
                     <div className={classes.style}>
                         <p>Email</p>
@@ -52,8 +53,9 @@ const RegisterformPage = () => {
                             {
                                 ...register('email')
                             }
+                            aria-invalid={errors.email ? true : false}
                         />
-                        {errors.email && <p>{errors.email.message}</p>}
+                        {errors?.email?.message && <p>{errors?.email?.message}</p>}
                     </div>
                     <div className={classes.style}>
                         <p>Password</p>
@@ -63,8 +65,9 @@ const RegisterformPage = () => {
                             {
                                 ...register('password')
                             }
+                            aria-invalid={errors.password ? true : false}
                         />
-                        {errors.password && <p>{errors.password.message}</p>}
+                        {errors?.password?.message && <p>{errors?.password?.message}</p>}
                     </div>
                     <div className={classes.style}>
                         <p>Re-enter password</p>
@@ -74,12 +77,21 @@ const RegisterformPage = () => {
                             {
                                 ...register('confirmPassword')
                             }
+                            aria-invalid={errors.confirmPassword ? true : false}
+
                         />
-                        {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+                        {
+                            errors?.confirmPassword?.message && <p>{errors?.confirmPassword?.message}</p>
+                        }
                     </div>
                 </div>
                 <div>
-                    <button className={classes.btn} type="submit">Continue</button>
+                    <button
+                        className={isValid ? classes.isValid : classes.btn}
+                        type="submit"
+                        disabled={!isValid}>
+                        Continue
+                    </button>
                 </div>
             </form>
         </div>

@@ -1,0 +1,21 @@
+//.list{
+//    display: flex;
+//
+//    &_title{
+//
+//    }
+//
+//    .title{
+//        color: red;
+//    }
+//}
+
+
+.list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+}
